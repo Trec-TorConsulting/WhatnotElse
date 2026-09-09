@@ -1,0 +1,20 @@
+{
+ "align_labels_right": 0,
+ "creation": "2026-09-09 12:00:00.000000",
+ "custom_format": 1,
+ "default_print_language": "en",
+ "disabled": 0,
+ "doc_type": "Whatnot Order",
+ "docstatus": 0,
+ "doctype": "Print Format",
+ "format_data": "[]",
+ "html": "<div class=\"thermal-slip\">\n    <div class=\"brand-header\">\n        <h2>WHATNOT ORDER PACKING SLIP</h2>\n        <div class=\"order-id\">ORDER #{{ doc.whatnot_order_id }}</div>\n    </div>\n\n    <div class=\"shipping-block\">\n        <div class=\"buyer-info\">\n            <div class=\"label\">SHIP TO:</div>\n            <div class=\"buyer-name\">@{{ doc.buyer_username }}</div>\n            <div class=\"address-box\">{{ doc.shipping_address or 'USPS Priority / Ground Advantage' }}</div>\n        </div>\n    </div>\n\n    {% if doc.tracking_number %}\n    <div class=\"tracking-box\">\n        <div class=\"label\">USPS TRACKING #:</div>\n        <div class=\"tracking-num\">{{ doc.tracking_number }}</div>\n        <div class=\"barcode-box\">*{{ doc.tracking_number }}*</div>\n    </div>\n    {% endif %}\n\n    <div class=\"items-box\">\n        <div class=\"label\">PACKAGE CONTENTS:</div>\n        <table class=\"items-list\">\n            <thead>\n                <tr>\n                    <th>Item</th>\n                    <th style=\"text-align: right;\">Qty</th>\n                </tr>\n            </thead>\n            <tbody>\n                {% for item in doc.items %}\n                <tr>\n                    <td>\n                        <strong>{{ item.item_name }}</strong>\n                        {% if item.item_code %}<div class=\"sku-code\">{{ item.item_code }}</div>{% endif %}\n                    </td>\n                    <td style=\"text-align: right; vertical-align: top;\"><strong>{{ item.qty or 1 }}</strong></td>\n                </tr>\n                {% endfor %}\n            </tbody>\n        </table>\n    </div>\n\n    <div class=\"footer-note\">\n        <p>Thank you for supporting our Whatnot live stream! Please leave a 5-star review on Whatnot.</p>\n    </div>\n</div>\n\n<style>\n@page {\n    size: 4in 6in;\n    margin: 0.15in;\n}\n.thermal-slip {\n    width: 3.7in;\n    font-family: 'Courier New', Courier, monospace, sans-serif;\n    font-size: 11px;\n    color: #000;\n}\n.brand-header {\n    text-align: center;\n    border-bottom: 2px dashed #000;\n    padding-bottom: 6px;\n    margin-bottom: 8px;\n}\n.brand-header h2 { font-size: 13px; margin: 0; font-weight: bold; }\n.order-id { font-size: 12px; font-weight: bold; margin-top: 4px; }\n.shipping-block { border-bottom: 1px solid #000; padding-bottom: 6px; margin-bottom: 6px; }\n.label { font-size: 9px; font-weight: bold; text-transform: uppercase; color: #333; margin-bottom: 2px; }\n.buyer-name { font-size: 14px; font-weight: bold; margin-bottom: 2px; }\n.address-box { font-size: 10px; line-height: 1.2; white-space: pre-line; }\n.tracking-box {\n    text-align: center;\n    border: 1px solid #000;\n    padding: 6px;\n    margin-bottom: 8px;\n}\n.tracking-num { font-size: 11px; font-weight: bold; font-family: monospace; }\n.barcode-box { font-family: 'Libre Barcode 39', 'Code39', monospace; font-size: 24px; letter-spacing: 2px; margin-top: 2px; }\n.items-box { border-bottom: 1px solid #000; padding-bottom: 6px; margin-bottom: 8px; }\n.items-list { width: 100%; border-collapse: collapse; font-size: 11px; margin-top: 4px; }\n.items-list th { border-bottom: 1px solid #000; text-align: left; padding: 2px 0; font-size: 10px; }\n.items-list td { padding: 4px 0; }\n.sku-code { font-size: 9px; color: #444; }\n.footer-note { text-align: center; font-size: 9px; line-height: 1.2; }\n</style>",
+ "modified": "2026-09-09 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Whatnot Else",
+ "name": "Whatnot Thermal Packing Slip",
+ "owner": "Administrator",
+ "print_format_builder": 0,
+ "print_format_type": "Jinja",
+ "standard": "Yes"
+}

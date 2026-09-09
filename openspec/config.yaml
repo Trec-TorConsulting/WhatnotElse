@@ -84,3 +84,13 @@ rules:
     - Break tasks into chunks no larger than a single DocType, controller, or manifest
     - Always include a Manual Verification step with kubectl or bench commands
     - Mark ERPNext vs. custom-app work separately
+  lifecycle:
+    commit_and_deploy:
+      1_branch: "Create a focused feature/bugfix branch from main (never commit directly to main)"
+      2_commit: "Well-documented commit following Conventional Commits format with detailed body"
+      3_push: "Push branch to remote origin"
+      4_pr: "Create well-documented Pull Request detailing context, changes, testing, and impact"
+      5_merge: "Verify CI tests pass; merge with admin override (--admin) when single-developer bypass is required"
+      6_post_merge: "Monitor automated post-merge verification and integration test suite"
+      7_deploy: "Deploy container image build and apply Kubernetes manifests to K3S cluster"
+

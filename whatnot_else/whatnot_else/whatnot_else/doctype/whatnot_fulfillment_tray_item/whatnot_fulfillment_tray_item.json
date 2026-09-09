@@ -1,0 +1,91 @@
+{
+ "creation": "2026-09-09 12:00:00.000000",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "item_name",
+  "barcode",
+  "order_id",
+  "lot_number",
+  "weight_oz",
+  "is_sorted",
+  "is_packed",
+  "verified_at"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Code",
+   "options": "Whatnot Item",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "item_code.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "barcode",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Barcode"
+  },
+  {
+   "fieldname": "order_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Whatnot Order",
+   "options": "Whatnot Order"
+  },
+  {
+   "fieldname": "lot_number",
+   "fieldtype": "Int",
+   "label": "Show Lot #"
+  },
+  {
+   "default": "0.00",
+   "fieldname": "weight_oz",
+   "fieldtype": "Float",
+   "label": "Weight (oz)"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_sorted",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Sorted to Tray"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_packed",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Verified in Box"
+  },
+  {
+   "fieldname": "verified_at",
+   "fieldtype": "Datetime",
+   "label": "Verified At",
+   "read_only": 1
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2026-09-09 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Whatnot Else",
+ "name": "Whatnot Fulfillment Tray Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

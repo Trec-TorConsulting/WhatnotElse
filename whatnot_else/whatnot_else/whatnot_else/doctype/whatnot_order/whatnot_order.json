@@ -19,6 +19,7 @@
   "section_shipping",
   "tracking_number",
   "shipping_status",
+  "fulfillment_tray",
   "shipping_address",
   "section_erpnext",
   "erpnext_sales_order",
@@ -114,6 +115,13 @@
    "fieldtype": "Select",
    "label": "Shipping Status",
    "options": "Label Generated\nIn Transit\nDelivered\nReturn Initiated"
+  },
+  {
+   "fieldname": "fulfillment_tray",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Fulfillment Tray",
+   "options": "Whatnot Fulfillment Tray"
   },
   {
    "fieldname": "shipping_address",

@@ -1,0 +1,146 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: whatnot-frappe-web
+  namespace: whatnot-else
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: whatnot-frappe-web
+  template:
+    metadata:
+      labels:
+        app: whatnot-frappe-web
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: NotIn
+                    values:
+                      - node05
+      containers:
+        - name: web
+          image: registry.maddscientist.com/whatnot-else/erpnext-whatnot:latest
+          command: ["/home/frappe/frappe-bench/env/bin/gunicorn"]
+          args:
+            - "--bind=0.0.0.0:8000"
+            - "--workers=3"
+            - "--threads=4"
+            - "--timeout=120"
+            - "frappe.app:application"
+          envFrom:
+            - configMapRef:
+                name: whatnot-else-config
+            - secretRef:
+                name: whatnot-else-secrets
+          ports:
+            - containerPort: 8000
+              name: http
+          volumeMounts:
+            - name: sites
+              mountPath: /home/frappe/frappe-bench/sites
+      volumes:
+        - name: sites
+          persistentVolumeClaim:
+            claimName: whatnot-sites-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: whatnot-frappe-web
+  namespace: whatnot-else
+spec:
+  ports:
+    - port: 8000
+      targetPort: 8000
+      name: http
+  selector:
+    app: whatnot-frappe-web
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: whatnot-frappe-worker-default
+  namespace: whatnot-else
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: whatnot-frappe-worker-default
+  template:
+    metadata:
+      labels:
+        app: whatnot-frappe-worker-default
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: NotIn
+                    values:
+                      - node05
+      containers:
+        - name: worker
+          image: registry.maddscientist.com/whatnot-else/erpnext-whatnot:latest
+          command: ["bench"]
+          args: ["worker", "--queue", "default"]
+          envFrom:
+            - configMapRef:
+                name: whatnot-else-config
+            - secretRef:
+                name: whatnot-else-secrets
+          volumeMounts:
+            - name: sites
+              mountPath: /home/frappe/frappe-bench/sites
+      volumes:
+        - name: sites
+          persistentVolumeClaim:
+            claimName: whatnot-sites-pvc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: whatnot-frappe-schedule
+  namespace: whatnot-else
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: whatnot-frappe-schedule
+  template:
+    metadata:
+      labels:
+        app: whatnot-frappe-schedule
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: NotIn
+                    values:
+                      - node05
+      containers:
+        - name: schedule
+          image: registry.maddscientist.com/whatnot-else/erpnext-whatnot:latest
+          command: ["bench"]
+          args: ["schedule"]
+          envFrom:
+            - configMapRef:
+                name: whatnot-else-config
+            - secretRef:
+                name: whatnot-else-secrets
+          volumeMounts:
+            - name: sites
+              mountPath: /home/frappe/frappe-bench/sites
+      volumes:
+        - name: sites
+          persistentVolumeClaim:
+            claimName: whatnot-sites-pvc

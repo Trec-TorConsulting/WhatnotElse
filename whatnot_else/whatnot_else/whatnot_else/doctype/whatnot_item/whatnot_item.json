@@ -1,0 +1,183 @@
+{
+ "creation": "2026-09-09 12:00:00.000000",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "field_order": [
+  "item_name",
+  "item_code",
+  "seller_profile",
+  "category",
+  "condition",
+  "column_break_1",
+  "status",
+  "stock_qty",
+  "barcode",
+  "qr_code",
+  "section_pricing",
+  "cogs",
+  "target_listing_price",
+  "reserve_price",
+  "column_break_2",
+  "currency",
+  "erpnext_item_code",
+  "section_details",
+  "description",
+  "ai_generated_description",
+  "image_url"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item Code / SKU",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "seller_profile",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Seller Profile",
+   "options": "Whatnot Seller Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Select",
+   "label": "Product Category",
+   "options": "\nTrading Cards\nCollectibles\nCoins & Bullion\nSneakers & Streetwear\nVintage/Thrift Clothing\nJewelry & Accessories\nElectronics\nSports Memorabilia\nComics & Books\nGeneral/Multi-category\nPersonal Shopper"
+  },
+  {
+   "fieldname": "condition",
+   "fieldtype": "Select",
+   "label": "Condition",
+   "options": "\nBrand New / Sealed\nMint\nNear Mint\nLightly Played / Used\nGood\nFair\nPoor / Damaged"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Available",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Available\nAssigned to Show\nSold\nArchived"
+  },
+  {
+   "default": "1",
+   "fieldname": "stock_qty",
+   "fieldtype": "Int",
+   "label": "Stock Quantity"
+  },
+  {
+   "fieldname": "barcode",
+   "fieldtype": "Data",
+   "label": "Barcode"
+  },
+  {
+   "fieldname": "qr_code",
+   "fieldtype": "Data",
+   "label": "QR Code String"
+  },
+  {
+   "fieldname": "section_pricing",
+   "fieldtype": "Section Break",
+   "label": "Financials & Valuation"
+  },
+  {
+   "default": "0.00",
+   "fieldname": "cogs",
+   "fieldtype": "Currency",
+   "label": "COGS (Cost of Goods Sold)",
+   "options": "currency"
+  },
+  {
+   "default": "0.00",
+   "fieldname": "target_listing_price",
+   "fieldtype": "Currency",
+   "label": "Target Listing Price",
+   "options": "currency"
+  },
+  {
+   "default": "0.00",
+   "fieldname": "reserve_price",
+   "fieldtype": "Currency",
+   "label": "Auction Reserve Price",
+   "options": "currency"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "USD",
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency"
+  },
+  {
+   "fieldname": "erpnext_item_code",
+   "fieldtype": "Link",
+   "label": "Linked ERPNext Item",
+   "options": "Item"
+  },
+  {
+   "fieldname": "section_details",
+   "fieldtype": "Section Break",
+   "label": "Listing Content"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "label": "Item Description"
+  },
+  {
+   "fieldname": "ai_generated_description",
+   "fieldtype": "Code",
+   "label": "AI Generated Copy & Tags",
+   "options": "Markdown"
+  },
+  {
+   "fieldname": "image_url",
+   "fieldtype": "Attach Image",
+   "label": "Item Image"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-09 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Whatnot Else",
+ "name": "Whatnot Item",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

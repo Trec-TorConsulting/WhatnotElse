@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: whatnotelse-wildcard-tls
+  namespace: whatnot-else
+spec:
+  secretName: whatnotelse-wildcard-tls
+  issuerRef:
+    name: cloudflare-dns-issuer
+    kind: ClusterIssuer
+  commonName: "whatnotelse.com"
+  dnsNames:
+    - "whatnotelse.com"
+    - "*.whatnotelse.com"

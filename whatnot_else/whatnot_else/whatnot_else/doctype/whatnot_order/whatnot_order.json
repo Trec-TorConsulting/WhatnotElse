@@ -1,0 +1,172 @@
+{
+ "creation": "2026-09-09 12:00:00.000000",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "field_order": [
+  "whatnot_order_id",
+  "seller_profile",
+  "buyer_username",
+  "order_date",
+  "status",
+  "column_break_1",
+  "currency",
+  "gross_amount",
+  "whatnot_fee",
+  "shipping_fee",
+  "net_payout",
+  "section_shipping",
+  "tracking_number",
+  "shipping_status",
+  "shipping_address",
+  "section_erpnext",
+  "erpnext_sales_order",
+  "section_items",
+  "items"
+ ],
+ "fields": [
+  {
+   "fieldname": "whatnot_order_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Whatnot Order ID",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "seller_profile",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Seller Profile",
+   "options": "Whatnot Seller Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "buyer_username",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Buyer Username",
+   "reqd": 1
+  },
+  {
+   "fieldname": "order_date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Order Date"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Order Status",
+   "options": "Pending\nProcessing\nPacked\nShipped\nDelivered\nCancelled\nRefunded"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "USD",
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency"
+  },
+  {
+   "default": "0.00",
+   "fieldname": "gross_amount",
+   "fieldtype": "Currency",
+   "label": "Gross Sale Amount"
+  },
+  {
+   "default": "0.00",
+   "fieldname": "whatnot_fee",
+   "fieldtype": "Currency",
+   "label": "Whatnot Commission (~11%)"
+  },
+  {
+   "default": "0.00",
+   "fieldname": "shipping_fee",
+   "fieldtype": "Currency",
+   "label": "Shipping Fee"
+  },
+  {
+   "default": "0.00",
+   "fieldname": "net_payout",
+   "fieldtype": "Currency",
+   "label": "Net Payout"
+  },
+  {
+   "fieldname": "section_shipping",
+   "fieldtype": "Section Break",
+   "label": "Shipping & Logistics"
+  },
+  {
+   "fieldname": "tracking_number",
+   "fieldtype": "Data",
+   "label": "USPS Tracking Number"
+  },
+  {
+   "default": "Label Generated",
+   "fieldname": "shipping_status",
+   "fieldtype": "Select",
+   "label": "Shipping Status",
+   "options": "Label Generated\nIn Transit\nDelivered\nReturn Initiated"
+  },
+  {
+   "fieldname": "shipping_address",
+   "fieldtype": "Small Text",
+   "label": "Buyer Shipping Address"
+  },
+  {
+   "fieldname": "section_erpnext",
+   "fieldtype": "Section Break",
+   "label": "ERPNext Financial Record"
+  },
+  {
+   "fieldname": "erpnext_sales_order",
+   "fieldtype": "Link",
+   "label": "Linked ERPNext Sales Order",
+   "options": "Sales Order"
+  },
+  {
+   "fieldname": "section_items",
+   "fieldtype": "Section Break",
+   "label": "Order Line Items"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Whatnot Order Item"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-09-09 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Whatnot Else",
+ "name": "Whatnot Order",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

@@ -1,0 +1,20 @@
+{
+ "content": null,
+ "creation": "2026-09-09 12:00:00.000000",
+ "docstatus": 0,
+ "doctype": "Page",
+ "icon": "octicon octicon-graph",
+ "modified": "2026-09-09 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Whatnot Else",
+ "name": "whatnot_dashboard",
+ "owner": "Administrator",
+ "page_name": "whatnot_dashboard",
+ "roles": [
+  {
+   "role": "System Manager"
+  }
+ ],
+ "standard": "Yes",
+ "title": "Whatnot Command Center"
+}

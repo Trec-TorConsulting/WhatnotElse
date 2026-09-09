@@ -8,6 +8,22 @@ class WhatnotOrder(Document):
 
     def on_submit(self):
         create_erpnext_sales_order(self)
+        update_buyer_record(self)
+
+def update_buyer_record(doc):
+    if not doc.buyer_username:
+        return
+    if not frappe.db.exists("Whatnot Buyer", {"username": doc.buyer_username}):
+        buyer = frappe.get_doc({
+            "doctype": "Whatnot Buyer",
+            "username": doc.buyer_username,
+            "seller_profile": doc.seller_profile
+        })
+        buyer.insert(ignore_permissions=True)
+    else:
+        buyer = frappe.get_doc("Whatnot Buyer", {"username": doc.buyer_username})
+    
+    buyer.update_metrics()
 
 def create_erpnext_sales_order(doc, method=None):
     if doc.erpnext_sales_order:

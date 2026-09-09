@@ -1,0 +1,22 @@
+{
+  "short_name": "WhatnotElse",
+  "name": "WhatnotElse Live Selling Operations",
+  "description": "Enterprise operations platform for Whatnot live stream sellers",
+  "icons": [
+    {
+      "src": "/assets/whatnot_else/icons/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/assets/whatnot_else/icons/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/scanner",
+  "background_color": "#0b0f19",
+  "theme_color": "#ff3366",
+  "display": "standalone",
+  "orientation": "portrait"
+}

@@ -1,0 +1,100 @@
+{
+ "creation": "2026-09-09 12:00:00.000000",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "channel_bridge",
+  "external_listing_id",
+  "sync_status",
+  "column_break_1",
+  "external_listing_url",
+  "external_price",
+  "last_synced_at",
+  "sync_error_message"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Whatnot Item",
+   "options": "Whatnot Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "channel_bridge",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Channel Bridge",
+   "options": "Whatnot Channel Bridge",
+   "reqd": 1
+  },
+  {
+   "fieldname": "external_listing_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "External Listing / Item ID",
+   "reqd": 1
+  },
+  {
+   "default": "Synced",
+   "fieldname": "sync_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Sync Status",
+   "options": "Synced\nDelisted\nPending Delist\nSync Error"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "external_listing_url",
+   "fieldtype": "Data",
+   "label": "External URL"
+  },
+  {
+   "default": "0.00",
+   "fieldname": "external_price",
+   "fieldtype": "Currency",
+   "label": "Price on Channel"
+  },
+  {
+   "fieldname": "last_synced_at",
+   "fieldtype": "Datetime",
+   "label": "Last Synced At"
+  },
+  {
+   "fieldname": "sync_error_message",
+   "fieldtype": "Small Text",
+   "label": "Sync Error Message"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-09 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Whatnot Else",
+ "name": "Whatnot Cross Listing",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

@@ -1,0 +1,59 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: whatnot-site-init
+  namespace: whatnot-else
+spec:
+  backoffLimit: 2
+  template:
+    metadata:
+      name: whatnot-site-init
+    spec:
+      restartPolicy: OnFailure
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: NotIn
+                    values:
+                      - node05
+      containers:
+        - name: init
+          image: registry.maddscientist.com/whatnot-else/erpnext-whatnot:latest
+          command: ["/bin/bash", "-c"]
+          args:
+            - |
+              set -e
+              echo "==> Initializing Frappe site whatnotelse.com..."
+              cd /home/frappe/frappe-bench
+              if [ ! -d "sites/whatnotelse.com" ]; then
+                bench new-site whatnotelse.com \
+                  --db-name whatnot_db \
+                  --db-host whatnot-mariadb.whatnot-else.svc.cluster.local \
+                  --db-port 3306 \
+                  --mariadb-root-password "$DB_ROOT_PASSWORD" \
+                  --admin-password "$ADMIN_PASSWORD" \
+                  --no-mariadb-socket
+                
+                bench --site whatnotelse.com install-app erpnext
+                bench --site whatnotelse.com install-app whatnot_else
+                bench --site whatnotelse.com set-config dns_multitenant true
+                echo "==> Site created and apps installed successfully!"
+              else
+                echo "==> Site already exists, running bench migrate..."
+                bench --site whatnotelse.com migrate
+              fi
+          envFrom:
+            - configMapRef:
+                name: whatnot-else-config
+            - secretRef:
+                name: whatnot-else-secrets
+          volumeMounts:
+            - name: sites
+              mountPath: /home/frappe/frappe-bench/sites
+      volumes:
+        - name: sites
+          persistentVolumeClaim:
+            claimName: whatnot-sites-pvc

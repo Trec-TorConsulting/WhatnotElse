@@ -9,6 +9,18 @@ class WhatnotOrder(Document):
     def on_submit(self):
         create_erpnext_sales_order(self)
         update_buyer_record(self)
+        trigger_cross_platform_updates(self)
+
+def trigger_cross_platform_updates(doc):
+    from whatnot_else.api.sync import trigger_cross_platform_delist
+    for item in (doc.items or []):
+        if item.item_code:
+            frappe.enqueue(
+                trigger_cross_platform_delist,
+                queue="default",
+                item_code_or_sku=item.item_code,
+                reason=f"Order {doc.whatnot_order_id} submitted"
+            )
 
 def update_buyer_record(doc):
     if not doc.buyer_username:

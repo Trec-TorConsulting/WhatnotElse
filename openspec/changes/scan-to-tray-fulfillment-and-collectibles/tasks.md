@@ -26,9 +26,9 @@
 ## 5. Git Lifecycle & Deployment
 
 - [x] 5.1 Create git feature branch `feat/scan-to-tray-fulfillment-and-collectibles`.
-- [ ] 5.2 Commit changes with Conventional Commits message and comprehensive description.
-- [ ] 5.3 Push feature branch to origin.
-- [ ] 5.4 Create GitHub Pull Request with full context, test verification, and impact analysis.
-- [ ] 5.5 Merge Pull Request into `main` using admin override (`gh pr merge --admin`).
-- [ ] 5.6 Run automated post-merge verification.
-- [ ] 5.7 Validate K3S manifests and build container image.
+- [x] 5.2 Commit changes with Conventional Commits message and comprehensive description.
+- [x] 5.3 Push feature branch to origin.
+- [x] 5.4 Create GitHub Pull Request with full context, test verification, and impact analysis.
+- [x] 5.5 Merge Pull Request into `main` using admin override (`gh pr merge --admin`).
+- [x] 5.6 Run automated post-merge verification.
+- [x] 5.7 Validate K3S manifests and build container image.

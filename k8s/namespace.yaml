@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: whatnot-else
+  labels:
+    app.kubernetes.io/name: whatnot-else
+    app.kubernetes.io/part-of: whatnot-operations

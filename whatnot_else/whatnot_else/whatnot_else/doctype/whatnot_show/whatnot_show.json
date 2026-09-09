@@ -1,0 +1,170 @@
+{
+ "creation": "2026-09-09 12:00:00.000000",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "field_order": [
+  "show_title",
+  "seller_profile",
+  "status",
+  "category",
+  "column_break_1",
+  "scheduled_start_time",
+  "scheduled_end_time",
+  "whatnot_show_id",
+  "stream_url",
+  "section_items",
+  "items",
+  "section_performance",
+  "total_items_planned",
+  "total_items_sold",
+  "gross_sales",
+  "column_break_2",
+  "total_platform_fees",
+  "total_cogs",
+  "net_profit"
+ ],
+ "fields": [
+  {
+   "fieldname": "show_title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Show Title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "seller_profile",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Seller Profile",
+   "options": "Whatnot Seller Profile",
+   "reqd": 1
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Draft\nScheduled\nLive\nCompleted\nCancelled"
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Select",
+   "label": "Show Category",
+   "options": "\nTrading Cards\nCollectibles\nCoins & Bullion\nSneakers & Streetwear\nVintage/Thrift Clothing\nJewelry & Accessories\nElectronics\nSports Memorabilia\nComics & Books\nGeneral/Multi-category\nPersonal Shopper"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "scheduled_start_time",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Scheduled Start Time"
+  },
+  {
+   "fieldname": "scheduled_end_time",
+   "fieldtype": "Datetime",
+   "label": "Scheduled End Time"
+  },
+  {
+   "fieldname": "whatnot_show_id",
+   "fieldtype": "Data",
+   "label": "Whatnot Show ID"
+  },
+  {
+   "fieldname": "stream_url",
+   "fieldtype": "Data",
+   "label": "Whatnot Stream URL"
+  },
+  {
+   "fieldname": "section_items",
+   "fieldtype": "Section Break",
+   "label": "Show Inventory Allocation"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Assigned Items",
+   "options": "Whatnot Show Item"
+  },
+  {
+   "fieldname": "section_performance",
+   "fieldtype": "Section Break",
+   "label": "Show Financial Performance"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_items_planned",
+   "fieldtype": "Int",
+   "label": "Total Items Planned",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "total_items_sold",
+   "fieldtype": "Int",
+   "label": "Total Items Sold",
+   "read_only": 1
+  },
+  {
+   "default": "0.00",
+   "fieldname": "gross_sales",
+   "fieldtype": "Currency",
+   "label": "Gross Sales Revenue",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0.00",
+   "fieldname": "total_platform_fees",
+   "fieldtype": "Currency",
+   "label": "Total Whatnot Fees (~11%)",
+   "read_only": 1
+  },
+  {
+   "default": "0.00",
+   "fieldname": "total_cogs",
+   "fieldtype": "Currency",
+   "label": "Total COGS",
+   "read_only": 1
+  },
+  {
+   "default": "0.00",
+   "fieldname": "net_profit",
+   "fieldtype": "Currency",
+   "label": "Net Show Profit",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-09 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Whatnot Else",
+ "name": "Whatnot Show",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

@@ -1,0 +1,136 @@
+{
+ "creation": "2026-09-09 12:00:00.000000",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "field_order": [
+  "seller_name",
+  "seller_slug",
+  "email",
+  "enabled",
+  "column_break_1",
+  "whatnot_user_id",
+  "whatnot_store_url",
+  "currency",
+  "section_credentials",
+  "api_token",
+  "webhook_secret",
+  "section_settings",
+  "default_tax_rate",
+  "platform_fee_percent",
+  "auto_create_sales_order"
+ ],
+ "fields": [
+  {
+   "fieldname": "seller_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Seller Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "seller_slug",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Seller Subdomain / Slug",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email Address",
+   "options": "Email"
+  },
+  {
+   "default": "1",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enabled"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "whatnot_user_id",
+   "fieldtype": "Data",
+   "label": "Whatnot User ID"
+  },
+  {
+   "fieldname": "whatnot_store_url",
+   "fieldtype": "Data",
+   "label": "Whatnot Store URL"
+  },
+  {
+   "default": "USD",
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency"
+  },
+  {
+   "fieldname": "section_credentials",
+   "fieldtype": "Section Break",
+   "label": "API Credentials"
+  },
+  {
+   "fieldname": "api_token",
+   "fieldtype": "Password",
+   "label": "API Bearer Token"
+  },
+  {
+   "fieldname": "webhook_secret",
+   "fieldtype": "Password",
+   "label": "Webhook Secret HMAC"
+  },
+  {
+   "fieldname": "section_settings",
+   "fieldtype": "Section Break",
+   "label": "Automation Settings"
+  },
+  {
+   "default": "0.00",
+   "fieldname": "default_tax_rate",
+   "fieldtype": "Percent",
+   "label": "Default Tax Rate"
+  },
+  {
+   "default": "11.00",
+   "fieldname": "platform_fee_percent",
+   "fieldtype": "Percent",
+   "label": "Whatnot Platform Fee Percent"
+  },
+  {
+   "default": "1",
+   "fieldname": "auto_create_sales_order",
+   "fieldtype": "Check",
+   "label": "Auto-create ERPNext Sales Orders"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-09 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Whatnot Else",
+ "name": "Whatnot Seller Profile",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

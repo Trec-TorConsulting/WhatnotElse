@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: whatnot-mariadb
+  namespace: whatnot-else
+spec:
+  serviceName: whatnot-mariadb
+  replicas: 1
+  selector:
+    matchLabels:
+      app: whatnot-mariadb
+  template:
+    metadata:
+      labels:
+        app: whatnot-mariadb
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: NotIn
+                    values:
+                      - node05
+      containers:
+        - name: mariadb
+          image: mariadb:10.6
+          args:
+            - "--character-set-server=utf8mb4"
+            - "--collation-server=utf8mb4_unicode_ci"
+            - "--innodb-buffer-pool-size=1G"
+            - "--innodb-file-per-table=1"
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: whatnot-else-secrets
+                  key: DB_ROOT_PASSWORD
+          ports:
+            - containerPort: 3306
+              name: mariadb
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: whatnot-mariadb-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: whatnot-mariadb
+  namespace: whatnot-else
+spec:
+  ports:
+    - port: 3306
+      targetPort: 3306
+      name: mariadb
+  selector:
+    app: whatnot-mariadb

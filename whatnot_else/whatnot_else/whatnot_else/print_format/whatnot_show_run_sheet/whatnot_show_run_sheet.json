@@ -1,0 +1,20 @@
+{
+ "align_labels_right": 0,
+ "creation": "2026-09-09 12:00:00.000000",
+ "custom_format": 1,
+ "default_print_language": "en",
+ "disabled": 0,
+ "doc_type": "Whatnot Show",
+ "docstatus": 0,
+ "doctype": "Print Format",
+ "format_data": "[]",
+ "html": "<div class=\"run-sheet\">\n    <div class=\"header\">\n        <div class=\"title-block\">\n            <h1>{{ doc.show_title }}</h1>\n            <div class=\"meta\">\n                <span><strong>Show ID:</strong> {{ doc.name }}</span> | \n                <span><strong>Category:</strong> {{ doc.category or 'General' }}</span> | \n                <span><strong>Scheduled Start:</strong> {{ frappe.utils.format_datetime(doc.scheduled_start_time, 'medium') if doc.scheduled_start_time else 'TBD' }}</span>\n            </div>\n        </div>\n        <div class=\"seller-block\">\n            <h3>{{ doc.seller_profile }}</h3>\n            <span class=\"badge\">{{ doc.status }}</span>\n        </div>\n    </div>\n\n    <table class=\"items-table\">\n        <thead>\n            <tr>\n                <th style=\"width: 8%;\">Lot #</th>\n                <th style=\"width: 40%;\">Item Description</th>\n                <th style=\"width: 14%;\">Type</th>\n                <th style=\"width: 12%;\">Start Bid</th>\n                <th style=\"width: 12%;\">Reserve</th>\n                <th style=\"width: 14%;\">Status</th>\n            </tr>\n        </thead>\n        <tbody>\n            {% for item in doc.items %}\n            <tr>\n                <td class=\"text-center\"><strong>#{{ loop.index }}</strong></td>\n                <td>\n                    <strong>{{ item.item_name }}</strong>\n                    <div class=\"sub-sku\">SKU: {{ item.item_code }}</div>\n                </td>\n                <td>{{ item.listing_type }}</td>\n                <td class=\"text-right\">{{ frappe.format_value(item.starting_bid, {'fieldtype': 'Currency'}) }}</td>\n                <td class=\"text-right\">{{ frappe.format_value(item.reserve_price, {'fieldtype': 'Currency'}) }}</td>\n                <td><span class=\"lot-status lot-{{ item.status | lower }}\">{{ item.status }}</span></td>\n            </tr>\n            {% endfor %}\n        </tbody>\n    </table>\n\n    <div class=\"summary-footer\">\n        <div><strong>Total Lots:</strong> {{ doc.items | length }}</div>\n        <div><strong>Target Total Value:</strong> {{ frappe.format_value(doc.items | sum(attribute='reserve_price'), {'fieldtype': 'Currency'}) }}</div>\n    </div>\n</div>\n\n<style>\n.run-sheet { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #111; padding: 20px; }\n.header { display: flex; justify-content: space-between; border-bottom: 2px solid #000; padding-bottom: 12px; margin-bottom: 20px; }\n.title-block h1 { font-size: 22px; margin: 0 0 6px 0; }\n.meta { font-size: 12px; color: #555; }\n.seller-block { text-align: right; }\n.badge { display: inline-block; padding: 4px 8px; background: #e2e8f0; font-weight: bold; border-radius: 4px; font-size: 11px; margin-top: 4px; }\n.items-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px; }\n.items-table th { background: #f1f5f9; border: 1px solid #cbd5e1; padding: 8px 10px; text-align: left; }\n.items-table td { border: 1px solid #cbd5e1; padding: 8px 10px; }\n.text-center { text-align: center; }\n.text-right { text-align: right; }\n.sub-sku { font-size: 11px; color: #64748b; }\n.lot-status { font-weight: 600; font-size: 11px; }\n.summary-footer { display: flex; justify-content: space-between; border-top: 2px solid #000; padding-top: 10px; font-size: 14px; }\n</style>",
+ "modified": "2026-09-09 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Whatnot Else",
+ "name": "Whatnot Show Run Sheet",
+ "owner": "Administrator",
+ "print_format_builder": 0,
+ "print_format_type": "Jinja",
+ "standard": "Yes"
+}

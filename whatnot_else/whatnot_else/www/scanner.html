@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WhatnotElse Scanner & Staging</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/whatnot_else/css/scanner.css">
+    <!-- Include HTML5-QRCode Scanner Library -->
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+</head>
+<body class="scanner-body">
+    <div class="scanner-container">
+        <!-- Top App Bar -->
+        <header class="scanner-header">
+            <div class="header-left">
+                <a href="/app" class="back-link">← Desk</a>
+                <h1 class="scanner-title">Live Staging Scanner</h1>
+            </div>
+            <div class="header-right">
+                <span class="live-pill" id="live-indicator">LIVE READY</span>
+            </div>
+        </header>
+
+        <!-- Viewport Camera Section -->
+        <div class="camera-card">
+            <div id="reader" class="scanner-viewport"></div>
+            <div class="scanner-controls">
+                <button id="btn-toggle-cam" class="btn btn-secondary">Switch Camera</button>
+                <button id="btn-torch" class="btn btn-secondary">Flashlight</button>
+            </div>
+        </div>
+
+        <!-- Manual Lookup Bar -->
+        <div class="manual-input-section">
+            <input type="text" id="manual-code-input" placeholder="Enter barcode, SKU, or QR code..." autocomplete="off">
+            <button id="btn-manual-lookup" class="btn btn-primary">Lookup</button>
+        </div>
+
+        <!-- Scanned Item Result Card -->
+        <div id="item-result-card" class="item-result-card hidden">
+            <div class="item-badge" id="res-status">Available</div>
+            <div class="item-header">
+                <h2 id="res-name" class="item-title">Item Title</h2>
+                <span id="res-code" class="item-sku">SKU-0000</span>
+            </div>
+
+            <div class="item-metrics-grid">
+                <div class="metric-box">
+                    <span class="metric-label">COGS</span>
+                    <span class="metric-value" id="res-cogs">$0.00</span>
+                </div>
+                <div class="metric-box">
+                    <span class="metric-label">Target BIN</span>
+                    <span class="metric-value" id="res-price">$0.00</span>
+                </div>
+                <div class="metric-box">
+                    <span class="metric-label">Stock Qty</span>
+                    <span class="metric-value" id="res-qty">1</span>
+                </div>
+            </div>
+
+            <!-- Show Staging Action -->
+            <div class="staging-actions">
+                <label for="select-show" class="field-label">Stage to Live Show:</label>
+                <select id="select-show" class="show-select">
+                    <option value="">Select an active broadcast...</option>
+                </select>
+                <div class="action-buttons">
+                    <button id="btn-stage-item" class="btn btn-accent">Assign to Show</button>
+                    <button id="btn-ai-rewrite" class="btn btn-ai">✨ AI Pitch Points</button>
+                </div>
+            </div>
+
+            <!-- AI Pitch Output Modal/Drawer -->
+            <div id="ai-output-box" class="ai-output-box hidden">
+                <div class="ai-box-header">
+                    <span>AI Stream Pitch Points</span>
+                    <button id="btn-close-ai" class="btn-close">&times;</button>
+                </div>
+                <div id="ai-content" class="ai-content-text">Generating shoutout points...</div>
+            </div>
+        </div>
+
+        <!-- Recent Scan History Bar -->
+        <footer class="scan-history-section">
+            <h3 class="history-title">Recent Scans</h3>
+            <div id="scan-history-list" class="history-chips">
+                <span class="history-empty">No items scanned yet</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/assets/whatnot_else/js/scanner.js"></script>
+</body>
+</html>

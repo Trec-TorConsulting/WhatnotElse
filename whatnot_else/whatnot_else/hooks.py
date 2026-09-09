@@ -28,7 +28,7 @@ app_license = "MIT"
 # doctype_js = {"Whatnot Order" : "public/js/whatnot_order.js"}
 # doctype_list_js = {"Whatnot Order" : "public/js/whatnot_order_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
-# doctype_calendar_js = {"Whatnot Show" : "public/js/whatnot_show_calendar.js"}
+doctype_calendar_js = {"Whatnot Show": "whatnot_else/doctype/whatnot_show/whatnot_show_calendar.js"}
 
 # Home Pages
 # ----------

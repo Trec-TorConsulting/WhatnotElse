@@ -11,12 +11,14 @@ accessible at whatnotelse.com, following all HomeLab-Redo cluster conventions.
 - Own MariaDB StatefulSet, own Redis instances, own Frappe workers
 
 ### Requirement: Gateway API routing
-- HTTPRoute on `kube-system/cluster-gateway` for `whatnotelse.com` and `www.whatnotelse.com`
-- ReferenceGrant allowing kube-system gateway to route to whatnot-else namespace
+- HTTPRoute on `kube-system/cluster-gateway` matching `*.whatnotelse.com` and `whatnotelse.com`
+- Wildcard DNS `*.whatnotelse.com` and root `whatnotelse.com` routed to VIP `192.168.4.7`
+- ReferenceGrant allowing kube-system gateway to route to `whatnot-else` namespace
+- Traefik middleware to pass seller host header (`X-Forwarded-Host`)
 - No legacy Ingress or IngressRoute objects
 
 ### Requirement: TLS via cert-manager
-- cert-manager Certificate for whatnotelse.com (HTTP-01 or DNS-01 via Cloudflare)
+- cert-manager Certificate for `*.whatnotelse.com` and `whatnotelse.com` using Cloudflare DNS-01 solver (required for wildcards)
 - Certificate Secret referenced by Gateway HTTPS listener
 
 ### Requirement: Longhorn storage

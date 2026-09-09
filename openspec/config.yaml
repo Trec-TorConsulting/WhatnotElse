@@ -3,41 +3,42 @@ schema: spec-driven
 context: |
   Project: whatnot_else — Enterprise Frappe/ERPNext custom app for Whatnot sellers
   App name (bench): whatnot_else
-  Domain: whatnotelse.com
+  Domain: whatnotelse.com (Multi-tenant: *.whatnotelse.com / https://<seller>.whatnotelse.com)
   Framework: Frappe v16 / ERPNext v16 (frappe/erpnext:version-16)
   Language: Python (Frappe), JavaScript (Frappe Desk / custom pages), HTML/CSS
 
   Infrastructure:
   - K3S homelab cluster (see ~/Projects/Personal/HomeLab-Redo/)
   - New namespace: whatnot-else (fully isolated from existing frappe namespace)
-  - New Frappe site: client.whatnotelse.com (internal) / public: whatnotelse.com
+  - Multi-tenant Subdomain Routing: Wildcard DNS (*.whatnotelse.com) pointed to K3S Traefik Gateway VIP (192.168.4.7)
+  - Each seller accessed at https://<seller>.whatnotelse.com
+  - Gateway: Traefik Gateway API — HTTPRoute on kube-system/cluster-gateway VIP 192.168.4.7 matching *.whatnotelse.com and whatnotelse.com
+  - TLS: cert-manager Certificate for *.whatnotelse.com and whatnotelse.com (DNS-01 via Cloudflare Issuer for wildcard support)
   - Storage: Longhorn (RWX PVC for sites, RWO for MariaDB)
-  - Gateway: Traefik Gateway API — HTTPRoute on kube-system/cluster-gateway VIP 192.168.4.7
-  - TLS: cert-manager + Cloudflare DNS-01 / HTTP-01 for whatnotelse.com
-  - Registry: registry.maddscientist.com
+  - Local Image Build: Built locally with Docker/buildx, pushed to local registry at registry.maddscientist.com/whatnot-else/erpnext-whatnot:latest
   - Node affinity: exclude node05 (GPU-only), schedule on general nodes (ARM64 or x86)
 
   Modules (Phase 1 — ALL):
   1. Inventory Management — Items, SKUs, COGS, bulk CSV import, barcode/QR
   2. Live Show Planner — schedule shows, assign items, streaming calendar
   3. Order Management — sync Whatnot orders via CSV import -> Sales Order, full lifecycle
-  4. Fulfillment & Shipping — USPS label gen, batch packing, Zebra/DYMO bulk print
+  4. Fulfillment & Shipping — USPS label gen (Whatnot built-in shipping integration), batch packing, Zebra/DYMO bulk print
   5. Financial / P&L — revenue, platform fees (11%), profit per item/show, Stripe recon
   6. Customer / Buyer CRM — repeat buyer tracking, VIP flags, notes, purchase history
   7. Purchasing / Restocking — POs, vendor mgmt, reorder alerts, estate/flea sourcing
   8. Multi-Platform Sync — eBay, Shopify, Mercari cross-listing bridge
-  9. AI Features — Gemini API (external AI) + Ollama node05 (local/private AI)
+  9. AI Features — Gemini API (via GEMINI_API_KEY secret) + Ollama node05 (local/private AI)
      listing copy generation, pricing suggestions, demand forecasting
   10. Reporting & Analytics — sales trends, top items, show performance, ROI/profit dashboards
 
   Integrations:
-  - Whatnot: CSV import (Phase 1), GraphQL API + webhooks (Phase 2 — awaiting API access)
+  - Whatnot: CSV import (Phase 1 — waiting on sellerapi@whatnot.com response), GraphQL API + webhooks (Phase 2)
     Webhook events: Listing Created/Updated, Order Created/Updated, Livestream events
+  - Shipping: Whatnot's built-in USPS shipping & label system
   - eBay API
   - Shopify / WooCommerce
-  - USPS / shipping label APIs
   - Stripe (payout reconciliation, 1099 tax support)
-  - Gemini API (Google AI Studio / Vertex AI)
+  - Gemini API (Google AI Studio via K8s Secret GEMINI_API_KEY)
   - Ollama in-cluster at http://ollama.ollama.svc.cluster.local:11434
 
   User & Security:

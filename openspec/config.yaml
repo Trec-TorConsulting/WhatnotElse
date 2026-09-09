@@ -1,0 +1,85 @@
+schema: spec-driven
+
+context: |
+  Project: whatnot_else — Enterprise Frappe/ERPNext custom app for Whatnot sellers
+  App name (bench): whatnot_else
+  Domain: whatnotelse.com
+  Framework: Frappe v16 / ERPNext v16 (frappe/erpnext:version-16)
+  Language: Python (Frappe), JavaScript (Frappe Desk / custom pages), HTML/CSS
+
+  Infrastructure:
+  - K3S homelab cluster (see ~/Projects/Personal/HomeLab-Redo/)
+  - New namespace: whatnot-else (fully isolated from existing frappe namespace)
+  - New Frappe site: client.whatnotelse.com (internal) / public: whatnotelse.com
+  - Storage: Longhorn (RWX PVC for sites, RWO for MariaDB)
+  - Gateway: Traefik Gateway API — HTTPRoute on kube-system/cluster-gateway VIP 192.168.4.7
+  - TLS: cert-manager + Cloudflare DNS-01 / HTTP-01 for whatnotelse.com
+  - Registry: registry.maddscientist.com
+  - Node affinity: exclude node05 (GPU-only), schedule on general nodes (ARM64 or x86)
+
+  Modules (Phase 1 — ALL):
+  1. Inventory Management — Items, SKUs, COGS, bulk CSV import, barcode/QR
+  2. Live Show Planner — schedule shows, assign items, streaming calendar
+  3. Order Management — sync Whatnot orders via CSV import -> Sales Order, full lifecycle
+  4. Fulfillment & Shipping — USPS label gen, batch packing, Zebra/DYMO bulk print
+  5. Financial / P&L — revenue, platform fees (11%), profit per item/show, Stripe recon
+  6. Customer / Buyer CRM — repeat buyer tracking, VIP flags, notes, purchase history
+  7. Purchasing / Restocking — POs, vendor mgmt, reorder alerts, estate/flea sourcing
+  8. Multi-Platform Sync — eBay, Shopify, Mercari cross-listing bridge
+  9. AI Features — Gemini API (external AI) + Ollama node05 (local/private AI)
+     listing copy generation, pricing suggestions, demand forecasting
+  10. Reporting & Analytics — sales trends, top items, show performance, ROI/profit dashboards
+
+  Integrations:
+  - Whatnot: CSV import (Phase 1), GraphQL API + webhooks (Phase 2 — awaiting API access)
+    Webhook events: Listing Created/Updated, Order Created/Updated, Livestream events
+  - eBay API
+  - Shopify / WooCommerce
+  - USPS / shipping label APIs
+  - Stripe (payout reconciliation, 1099 tax support)
+  - Gemini API (Google AI Studio / Vertex AI)
+  - Ollama in-cluster at http://ollama.ollama.svc.cluster.local:11434
+
+  User & Security:
+  - Roles: Admin, Seller, Warehouse Staff, Accountant
+  - Multi-seller accounts (one ERPNext user manages multiple Whatnot seller profiles)
+  - API token auth for webhook/integration endpoints
+  - Full audit log of all mutations
+  - Language: English only
+
+  UX Requirements:
+  - Mobile-first responsive (Frappe Desk + custom Frappe Web pages)
+  - Dark mode UI theme (custom Frappe theme)
+  - Barcode/QR scan -> item lookup on mobile browser
+  - Streaming schedule calendar view
+  - Bulk label printing (Zebra/DYMO)
+  - PDF packing slips
+  - Email/SMS/push notifications (order alerts, restock alerts)
+  - Tax/1099 support for seller payouts
+  - Stripe payout reconciliation
+  - Show ROI / profit dashboard per show and per item
+
+  Product categories supported:
+  Trading Cards, Collectibles, Coins & Bullion, Sneakers & Streetwear,
+  Vintage/Thrift Clothing, Jewelry & Accessories, Electronics, Sports Memorabilia,
+  Comics & Books, General/Multi-category, Personal Shopper (flea market / estate sales)
+
+  Code conventions (aligned to HomeLab-Redo cluster patterns):
+  - YAML: 2-space indent, lowercase-hyphen filenames
+  - Frappe DocTypes: PascalCase, use standard Frappe patterns
+  - Secrets: Kubernetes Secrets only, never committed plaintext
+  - All workloads must exclude node05 (gpu-only NoSchedule taint)
+  - HTTPRoute only (no legacy Ingress or IngressRoute)
+  - Longhorn default StorageClass for all PVCs
+
+rules:
+  proposal:
+    - Include a "Whatnot Impact" section describing how the change affects sellers
+    - Always list affected DocTypes and Frappe hooks
+    - Include K3S manifest changes if infra is affected
+    - Tag proposals with the module they belong to (inventory, orders, shows, etc.)
+    - Include a rollback plan for any database migration
+  tasks:
+    - Break tasks into chunks no larger than a single DocType, controller, or manifest
+    - Always include a Manual Verification step with kubectl or bench commands
+    - Mark ERPNext vs. custom-app work separately

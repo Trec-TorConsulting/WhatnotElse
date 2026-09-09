@@ -1,0 +1,154 @@
+{
+ "creation": "2026-09-09 12:00:00.000000",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "field_order": [
+  "username",
+  "seller_profile",
+  "vip_tier",
+  "column_break_1",
+  "lifetime_spend",
+  "total_orders_count",
+  "average_order_value",
+  "last_order_date",
+  "section_details",
+  "full_name",
+  "email",
+  "shipping_address",
+  "favorite_category",
+  "column_break_2",
+  "linked_customer",
+  "section_notes",
+  "streamer_notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "username",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Whatnot Username",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "seller_profile",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Seller Profile",
+   "options": "Whatnot Seller Profile"
+  },
+  {
+   "default": "Standard",
+   "fieldname": "vip_tier",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "VIP Tier",
+   "options": "Standard\nSilver VIP\nGold VIP\nWhale VIP"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0.00",
+   "fieldname": "lifetime_spend",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Lifetime Value (LTV)",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "total_orders_count",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Total Orders",
+   "read_only": 1
+  },
+  {
+   "default": "0.00",
+   "fieldname": "average_order_value",
+   "fieldtype": "Currency",
+   "label": "Average Order Value (AOV)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_order_date",
+   "fieldtype": "Datetime",
+   "label": "Last Order Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_details",
+   "fieldtype": "Section Break",
+   "label": "Buyer Details"
+  },
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "label": "Full Name"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "shipping_address",
+   "fieldtype": "Small Text",
+   "label": "Primary Shipping Address"
+  },
+  {
+   "fieldname": "favorite_category",
+   "fieldtype": "Data",
+   "label": "Favorite Product Category"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "linked_customer",
+   "fieldtype": "Link",
+   "label": "Linked ERPNext Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "section_notes",
+   "fieldtype": "Section Break",
+   "label": "Streamer Private Notes"
+  },
+  {
+   "fieldname": "streamer_notes",
+   "fieldtype": "Text",
+   "label": "Notes & Bidding Habits"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-09 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Whatnot Else",
+ "name": "Whatnot Buyer",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "lifetime_spend",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

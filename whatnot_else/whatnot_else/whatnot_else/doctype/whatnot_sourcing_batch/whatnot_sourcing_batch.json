@@ -1,0 +1,144 @@
+{
+ "creation": "2026-09-09 12:00:00.000000",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "field_order": [
+  "batch_name",
+  "seller_profile",
+  "source_type",
+  "purchase_date",
+  "column_break_1",
+  "currency",
+  "total_cost",
+  "total_items_count",
+  "allocation_method",
+  "section_vendor",
+  "vendor_name",
+  "location_notes",
+  "receipt_image",
+  "section_items",
+  "items"
+ ],
+ "fields": [
+  {
+   "fieldname": "batch_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Batch Title / Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "seller_profile",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Seller Profile",
+   "options": "Whatnot Seller Profile",
+   "reqd": 1
+  },
+  {
+   "default": "Estate Sale",
+   "fieldname": "source_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Source Type",
+   "options": "Estate Sale\nFlea Market\nThrift Store\nGarage Sale\nDistributor / Wholesale\nStorage Unit Auction\nPrivate Collection"
+  },
+  {
+   "fieldname": "purchase_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Purchase Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "USD",
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency"
+  },
+  {
+   "default": "0.00",
+   "fieldname": "total_cost",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Batch Purchase Cost",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "total_items_count",
+   "fieldtype": "Int",
+   "label": "Total Items Sourced",
+   "read_only": 1
+  },
+  {
+   "default": "Equal Split",
+   "fieldname": "allocation_method",
+   "fieldtype": "Select",
+   "label": "COGS Allocation Method",
+   "options": "Equal Split\nManual Value Weighted"
+  },
+  {
+   "fieldname": "section_vendor",
+   "fieldtype": "Section Break",
+   "label": "Sourcing Origin & Receipt"
+  },
+  {
+   "fieldname": "vendor_name",
+   "fieldtype": "Data",
+   "label": "Vendor / Seller Contact"
+  },
+  {
+   "fieldname": "location_notes",
+   "fieldtype": "Small Text",
+   "label": "Location / Sourcing Notes"
+  },
+  {
+   "fieldname": "receipt_image",
+   "fieldtype": "Attach Image",
+   "label": "Receipt / Purchase Proof"
+  },
+  {
+   "fieldname": "section_items",
+   "fieldtype": "Section Break",
+   "label": "Sourced Inventory Items"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Whatnot Sourcing Item"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-09 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Whatnot Else",
+ "name": "Whatnot Sourcing Batch",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "purchase_date",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

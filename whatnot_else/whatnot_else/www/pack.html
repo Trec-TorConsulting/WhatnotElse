@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WhatnotElse - Warehouse Fulfillment Station</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="manifest" href="/assets/whatnot_else/manifest.json">
+    <meta name="theme-color" content="#0d1117">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="/assets/whatnot_else/css/pack.css">
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/assets/whatnot_else/sw.js').catch(err => console.warn('SW reg error', err));
+            });
+        }
+    </script>
+</head>
+<body class="pack-body">
+    <div class="pack-container">
+        <!-- Station Header -->
+        <header class="pack-header">
+            <div class="header-left">
+                <a href="/app" class="back-link">← Desk</a>
+                <div class="title-wrap">
+                    <h1 class="pack-title">Fulfillment Station</h1>
+                    <span class="station-sub">Scan-to-Tray & Packing Verifier</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <button id="btn-audio-toggle" class="btn btn-audio" title="Toggle audio cues">
+                    <span id="audio-icon">🔊</span> <span id="audio-status-text">Audio Active</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Control Bar: Show Selector & Mode Toggle -->
+        <div class="control-card">
+            <div class="control-row">
+                <div class="form-group flex-1">
+                    <label for="show-select">Live Show</label>
+                    <div class="input-with-button">
+                        <input type="text" id="show-input" placeholder="Enter Show ID (e.g. SHOW-001)..." value="">
+                        <button id="btn-allocate-trays" class="btn btn-secondary">Auto-Allocate Trays</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mode Switcher -->
+            <div class="mode-tabs">
+                <button id="tab-scan-to-tray" class="mode-tab active" data-mode="tray">
+                    <span class="tab-icon">📥</span>
+                    <span class="tab-label">Mode 1: Scan-to-Tray (Sort)</span>
+                </button>
+                <button id="tab-scan-to-box" class="mode-tab" data-mode="box">
+                    <span class="tab-icon">📦</span>
+                    <span class="tab-label">Mode 2: Scan-to-Box (Verify)</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mode 1: Scan-to-Tray UI -->
+        <section id="section-scan-to-tray" class="mode-section active">
+            <!-- Continuous Barcode Input -->
+            <div class="scan-bar-card">
+                <div class="scan-input-group">
+                    <input type="text" id="tray-scan-input" placeholder="Scan item barcode or SKU to sort..." autofocus autocomplete="off">
+                    <button id="btn-tray-scan" class="btn btn-primary">Process</button>
+                </div>
+                <div class="scan-hint">Keep barcode scanner focused. Audio will announce Tray # automatically.</div>
+            </div>
+
+            <!-- Giant Routing Target Display -->
+            <div id="tray-routing-display" class="tray-routing-card idle">
+                <div class="routing-badge" id="routing-badge">Ready for Scan</div>
+                <div class="giant-tray-number" id="routing-tray-num">TRAY --</div>
+                <div class="routing-buyer-name" id="routing-buyer">@buyer</div>
+                <div class="routing-item-name" id="routing-item">Scan an item barcode from completed live show</div>
+                <div class="routing-lot-tag" id="routing-lot">Lot #--</div>
+                
+                <div class="routing-progress-wrap">
+                    <div class="progress-bar-bg">
+                        <div id="routing-progress-fill" class="progress-bar-fill" style="width: 0%"></div>
+                    </div>
+                    <span id="routing-progress-text" class="progress-label">0 of 0 items sorted</span>
+                </div>
+
+                <div id="routing-weight-warning" class="weight-warning-pill hidden">
+                    ⚠️ Weight Alert: Exceeds 16 oz threshold
+                </div>
+            </div>
+        </section>
+
+        <!-- Mode 2: Scan-to-Box UI -->
+        <section id="section-scan-to-box" class="mode-section hidden">
+            <!-- Box/Tray Selection Bar -->
+            <div class="box-selection-card">
+                <div class="form-group flex-1">
+                    <label for="active-tray-input">Target Tray / Box to Pack</label>
+                    <div class="input-with-button">
+                        <input type="text" id="active-tray-input" placeholder="Scan or enter Tray # (e.g. 14 or TRAY-14)...">
+                        <button id="btn-load-tray" class="btn btn-secondary">Open Tray</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Packing Verification Header Card -->
+            <div id="box-header-card" class="box-header-card hidden">
+                <div class="box-header-top">
+                    <div>
+                        <span class="box-tray-label" id="box-tray-label">Packing Tray #14</span>
+                        <h2 class="box-buyer-title" id="box-buyer-title">@buyer_username</h2>
+                    </div>
+                    <div class="box-weight-badge" id="box-weight-badge">0.0 oz</div>
+                </div>
+
+                <!-- Live Progress -->
+                <div class="packing-progress-bar">
+                    <div id="packing-fill" class="packing-fill" style="width: 0%"></div>
+                </div>
+                <div class="packing-progress-labels">
+                    <span id="packing-count-label">0 / 0 Items Verified</span>
+                    <span id="packing-pct-label">0% Complete</span>
+                </div>
+
+                <!-- Box Scan Input -->
+                <div class="box-scan-input-wrap">
+                    <input type="text" id="box-item-scan-input" placeholder="Scan item into box to verify..." autocomplete="off">
+                    <button id="btn-verify-item" class="btn btn-primary">Verify Item</button>
+                </div>
+            </div>
+
+            <!-- Tray Item Manifest Checklist -->
+            <div id="box-manifest-card" class="box-manifest-card hidden">
+                <h3 class="manifest-title">Tray Manifest Checklist</h3>
+                <div id="manifest-items-list" class="manifest-items-list">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
+            <!-- Complete Order Celebration Card -->
+            <div id="box-complete-card" class="box-complete-card hidden">
+                <div class="celebration-icon">✅</div>
+                <h2 class="celebration-title">Order 100% Verified & Packed!</h2>
+                <p class="celebration-subtitle">Zero mis-ships. All items accounted for in this shipment.</p>
+                <div class="celebration-actions">
+                    <button id="btn-print-thermal-label" class="btn btn-success btn-lg">Print 4x6 Thermal Label & Slip</button>
+                    <button id="btn-next-tray" class="btn btn-secondary btn-lg">Next Tray →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mis-Ship Alarm Modal -->
+        <div id="mis-ship-modal" class="modal-overlay hidden">
+            <div class="modal-card mis-ship-card">
+                <div class="modal-alarm-icon">🚨</div>
+                <h2 class="modal-alarm-title">MIS-SHIP DETECTED!</h2>
+                <p id="mis-ship-msg" class="modal-alarm-msg">
+                    Scanned item belongs to a DIFFERENT tray! Do NOT place in this box.
+                </p>
+                <div class="mis-ship-target-box">
+                    <span>Move Item To:</span>
+                    <div class="mis-ship-tray-target" id="mis-ship-target-tray">TRAY --</div>
+                    <div class="mis-ship-buyer-target" id="mis-ship-target-buyer">@buyer</div>
+                </div>
+                <button id="btn-dismiss-alarm" class="btn btn-danger btn-lg">Acknowledge & Correct</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/assets/whatnot_else/js/pack.js"></script>
+</body>
+</html>

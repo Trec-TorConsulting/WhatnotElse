@@ -15,6 +15,14 @@
   "stock_qty",
   "barcode",
   "qr_code",
+  "weight_oz",
+  "section_collectibles",
+  "is_graded",
+  "grading_company",
+  "grade",
+  "column_break_collectibles",
+  "cert_number",
+  "pop_report_notes",
   "section_pricing",
   "cogs",
   "target_listing_price",
@@ -90,6 +98,53 @@
    "fieldname": "qr_code",
    "fieldtype": "Data",
    "label": "QR Code String"
+  },
+  {
+   "default": "0.00",
+   "fieldname": "weight_oz",
+   "fieldtype": "Float",
+   "label": "Weight (oz)"
+  },
+  {
+   "fieldname": "section_collectibles",
+   "fieldtype": "Section Break",
+   "label": "Graded & Certified Collectible Details"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_graded",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Is Authenticated / Graded Slab"
+  },
+  {
+   "depends_on": "eval:doc.is_graded==1",
+   "fieldname": "grading_company",
+   "fieldtype": "Select",
+   "label": "Grading Service",
+   "options": "\nPSA\nBGS\nCGC\nSGC\nPCGS\nNGC\nOther"
+  },
+  {
+   "depends_on": "eval:doc.is_graded==1",
+   "fieldname": "grade",
+   "fieldtype": "Data",
+   "label": "Grade / Sub-grade"
+  },
+  {
+   "fieldname": "column_break_collectibles",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.is_graded==1",
+   "fieldname": "cert_number",
+   "fieldtype": "Data",
+   "label": "Certification #"
+  },
+  {
+   "depends_on": "eval:doc.is_graded==1",
+   "fieldname": "pop_report_notes",
+   "fieldtype": "Small Text",
+   "label": "Population & Verification Notes"
   },
   {
    "fieldname": "section_pricing",

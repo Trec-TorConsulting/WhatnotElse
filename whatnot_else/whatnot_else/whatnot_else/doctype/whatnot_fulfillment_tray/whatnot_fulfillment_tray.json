@@ -1,0 +1,157 @@
+{
+ "autoname": "format:TRAY-{tray_number}-{show}",
+ "creation": "2026-09-09 12:00:00.000000",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "field_order": [
+  "tray_number",
+  "show",
+  "buyer_username",
+  "buyer",
+  "status",
+  "column_break_1",
+  "total_items",
+  "sorted_items",
+  "packed_items",
+  "total_weight_oz",
+  "weight_warning",
+  "weight_warning_notes",
+  "section_break_items",
+  "items",
+  "section_break_notes",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "tray_number",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Tray #",
+   "reqd": 1
+  },
+  {
+   "fieldname": "show",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Live Show",
+   "options": "Whatnot Show",
+   "reqd": 1
+  },
+  {
+   "fieldname": "buyer_username",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Buyer Username",
+   "reqd": 1
+  },
+  {
+   "fieldname": "buyer",
+   "fieldtype": "Link",
+   "label": "Buyer Record",
+   "options": "Whatnot Buyer"
+  },
+  {
+   "default": "Available",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Available\nAllocated\nSorting\nReady to Pack\nPacked\nShipped"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_items",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Total Items",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "sorted_items",
+   "fieldtype": "Int",
+   "label": "Sorted Items",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "packed_items",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Packed Items",
+   "read_only": 1
+  },
+  {
+   "default": "0.00",
+   "fieldname": "total_weight_oz",
+   "fieldtype": "Float",
+   "label": "Total Weight (oz)",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "weight_warning",
+   "fieldtype": "Check",
+   "label": "Weight Tier Warning (>16 oz)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "weight_warning_notes",
+   "fieldtype": "Small Text",
+   "label": "Weight Notes",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_items",
+   "fieldtype": "Section Break",
+   "label": "Assigned Tray Items"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Whatnot Fulfillment Tray Item"
+  },
+  {
+   "fieldname": "section_break_notes",
+   "fieldtype": "Section Break",
+   "label": "Notes & Instructions"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Packing Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-09 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Whatnot Else",
+ "name": "Whatnot Fulfillment Tray",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "tray_number",
+ "sort_order": "ASC",
+ "track_changes": 1
+}

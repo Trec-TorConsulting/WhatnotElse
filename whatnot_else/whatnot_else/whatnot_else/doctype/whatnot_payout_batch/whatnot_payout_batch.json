@@ -1,0 +1,143 @@
+{
+ "creation": "2026-09-09 12:00:00.000000",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "field_order": [
+  "payout_id",
+  "seller_profile",
+  "payout_date",
+  "status",
+  "column_break_1",
+  "currency",
+  "gross_amount",
+  "whatnot_fees",
+  "shipping_fees",
+  "net_deposit_amount",
+  "section_stripe",
+  "stripe_payout_id",
+  "stripe_bank_account",
+  "section_orders",
+  "orders"
+ ],
+ "fields": [
+  {
+   "fieldname": "payout_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Payout Batch ID",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "seller_profile",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Seller Profile",
+   "options": "Whatnot Seller Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "payout_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Payout Date",
+   "reqd": 1
+  },
+  {
+   "default": "Reconciled",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Reconciliation Status",
+   "options": "Pending\nReconciled\nDiscrepancy"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "USD",
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency"
+  },
+  {
+   "default": "0.00",
+   "fieldname": "gross_amount",
+   "fieldtype": "Currency",
+   "label": "Gross Sales Included"
+  },
+  {
+   "default": "0.00",
+   "fieldname": "whatnot_fees",
+   "fieldtype": "Currency",
+   "label": "Whatnot Commission Deducted"
+  },
+  {
+   "default": "0.00",
+   "fieldname": "shipping_fees",
+   "fieldtype": "Currency",
+   "label": "Shipping Deductions"
+  },
+  {
+   "default": "0.00",
+   "fieldname": "net_deposit_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Net Bank Deposit Amount"
+  },
+  {
+   "fieldname": "section_stripe",
+   "fieldtype": "Section Break",
+   "label": "Stripe Transfer Details"
+  },
+  {
+   "fieldname": "stripe_payout_id",
+   "fieldtype": "Data",
+   "label": "Stripe Payout ID (po_...)"
+  },
+  {
+   "fieldname": "stripe_bank_account",
+   "fieldtype": "Data",
+   "label": "Destination Account"
+  },
+  {
+   "fieldname": "section_orders",
+   "fieldtype": "Section Break",
+   "label": "Reconciled Orders"
+  },
+  {
+   "fieldname": "orders",
+   "fieldtype": "Table",
+   "label": "Included Orders",
+   "options": "Whatnot Payout Order Link"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-09 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Whatnot Else",
+ "name": "Whatnot Payout Batch",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "payout_date",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

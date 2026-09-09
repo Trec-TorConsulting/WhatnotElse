@@ -1,0 +1,17 @@
+[
+ {
+  "doctype": "Role",
+  "role_name": "Whatnot Seller",
+  "desk_access": 1
+ },
+ {
+  "doctype": "Role",
+  "role_name": "Whatnot Warehouse Staff",
+  "desk_access": 1
+ },
+ {
+  "doctype": "Role",
+  "role_name": "Whatnot Accountant",
+  "desk_access": 1
+ }
+]

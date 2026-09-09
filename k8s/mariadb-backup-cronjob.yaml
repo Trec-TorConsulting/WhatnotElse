@@ -1,0 +1,50 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: whatnot-mariadb-backup
+  namespace: whatnot-else
+spec:
+  schedule: "0 3 * * *" # Daily at 3 AM
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 2
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: kubernetes.io/hostname
+                        operator: NotIn
+                        values:
+                          - node05
+          containers:
+            - name: backup
+              image: mariadb:10.6
+              command: ["/bin/bash", "-c"]
+              args:
+                - |
+                  set -e
+                  TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+                  mkdir -p /backups
+                  echo "==> Executing MariaDB backup: whatnot_backup_${TIMESTAMP}.sql.gz"
+                  mysqldump -h whatnot-mariadb -u root -p"$DB_ROOT_PASSWORD" --all-databases | gzip > /backups/whatnot_backup_${TIMESTAMP}.sql.gz
+                  echo "==> Backup complete. Retaining last 7 days of archives..."
+                  find /backups -name "whatnot_backup_*.sql.gz" -mtime +7 -delete
+              env:
+                - name: DB_ROOT_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: whatnot-else-secrets
+                      key: DB_ROOT_PASSWORD
+              volumeMounts:
+                - name: sites
+                  mountPath: /backups
+                  subPath: backups
+          volumes:
+            - name: sites
+              persistentVolumeClaim:
+                claimName: whatnot-sites-pvc

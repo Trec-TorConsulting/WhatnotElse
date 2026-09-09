@@ -1,0 +1,179 @@
+{
+ "autoname": "field:plan_name",
+ "creation": "2026-09-09 13:00:00.000000",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "field_order": [
+  "plan_name",
+  "plan_slug",
+  "is_active",
+  "is_default",
+  "column_break_1",
+  "price_cents",
+  "billing_interval",
+  "stripe_price_id",
+  "stripe_product_id",
+  "section_break_limits",
+  "max_shows_per_month",
+  "max_trays",
+  "max_items",
+  "column_break_2",
+  "enable_multi_channel_sync",
+  "enable_ai_copilot",
+  "enable_obs_overlay",
+  "enable_priority_support",
+  "section_break_details",
+  "description",
+  "features_summary"
+ ],
+ "fields": [
+  {
+   "fieldname": "plan_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Plan Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "plan_slug",
+   "fieldtype": "Data",
+   "label": "Slug",
+   "read_only": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Active"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_default",
+   "fieldtype": "Check",
+   "label": "Default Plan (Free Trial)"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "price_cents",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Price (cents USD)"
+  },
+  {
+   "default": "month",
+   "fieldname": "billing_interval",
+   "fieldtype": "Select",
+   "label": "Billing Interval",
+   "options": "month\nyear"
+  },
+  {
+   "fieldname": "stripe_price_id",
+   "fieldtype": "Data",
+   "label": "Stripe Price ID"
+  },
+  {
+   "fieldname": "stripe_product_id",
+   "fieldtype": "Data",
+   "label": "Stripe Product ID"
+  },
+  {
+   "fieldname": "section_break_limits",
+   "fieldtype": "Section Break",
+   "label": "Feature Limits"
+  },
+  {
+   "default": "10",
+   "fieldname": "max_shows_per_month",
+   "fieldtype": "Int",
+   "label": "Max Shows / Month"
+  },
+  {
+   "default": "50",
+   "fieldname": "max_trays",
+   "fieldtype": "Int",
+   "label": "Max Fulfillment Trays"
+  },
+  {
+   "default": "500",
+   "fieldname": "max_items",
+   "fieldtype": "Int",
+   "label": "Max Inventory Items"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_multi_channel_sync",
+   "fieldtype": "Check",
+   "label": "Multi-Channel Sync"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_ai_copilot",
+   "fieldtype": "Check",
+   "label": "AI Audio Co-Pilot"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_obs_overlay",
+   "fieldtype": "Check",
+   "label": "OBS Stream Overlay"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_priority_support",
+   "fieldtype": "Check",
+   "label": "Priority Support"
+  },
+  {
+   "fieldname": "section_break_details",
+   "fieldtype": "Section Break",
+   "label": "Description"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Plan Description"
+  },
+  {
+   "fieldname": "features_summary",
+   "fieldtype": "Long Text",
+   "label": "Feature Bullet Points (Markdown)"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2026-09-09 13:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Whatnot Else",
+ "name": "Whatnot Subscription Plan",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "price_cents",
+ "sort_order": "ASC",
+ "track_changes": 1
+}

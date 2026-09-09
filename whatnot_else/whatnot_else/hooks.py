@@ -46,6 +46,13 @@ doc_events = {
     }
 }
 
+# Website Route Rules
+# -------------------
+website_route_rules = [
+    {"from_route": "/overlay", "to_route": "overlay"},
+    {"from_route": "/api/stripe/webhook", "to_route": "whatnot_else.api.stripe_billing.handle_stripe_webhook"},
+]
+
 # Scheduled Tasks
 # ---------------
 
@@ -66,3 +73,4 @@ doc_events = {
 # 		"whatnot_else.tasks.monthly"
 # 	],
 # }
+

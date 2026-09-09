@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WhatnotElse Broadcast Overlay HUD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/whatnot_else/css/overlay.css">
+</head>
+<body class="obs-transparent">
+  <div id="overlay-container" class="hud-canvas">
+    <!-- Top Bar: Live Status & Quick Stats -->
+    <header class="hud-header">
+      <div class="stream-pill">
+        <span class="live-dot pulse"></span>
+        <span id="stream-status">LIVE STREAM</span>
+        <span class="stream-separator">|</span>
+        <span id="show-title" class="show-title-text">Loading Show...</span>
+      </div>
+
+      <div class="stats-ticker">
+        <div class="stat-item">
+          <span class="stat-label">ORDERS</span>
+          <span id="stat-orders" class="stat-value">0</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">SALES</span>
+          <span id="stat-revenue" class="stat-value">$0.00</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- VIP Buyer Pop-Up Alert Banner -->
+    <aside id="vip-banner" class="vip-alert-banner hidden">
+      <div class="vip-icon">💎</div>
+      <div class="vip-content">
+        <span class="vip-tier" id="vip-tier">PLATINUM VIP</span>
+        <span class="vip-user" id="vip-username">@collector</span>
+        <span class="vip-text">just entered the room!</span>
+      </div>
+    </aside>
+
+    <!-- Lower-Third / Side Lot Display Card -->
+    <main class="hud-body">
+      <section id="lot-card" class="glass-card active-lot-card">
+        <div class="card-glow"></div>
+        <div class="lot-header">
+          <div class="lot-badge-wrapper">
+            <span class="lot-tag">LOT #<span id="lot-number">1</span></span>
+            <span id="grade-badge" class="grade-badge hidden">PSA 10</span>
+          </div>
+          <span id="reserve-badge" class="reserve-badge hidden">RESERVE MET</span>
+        </div>
+
+        <div class="lot-main">
+          <div class="lot-info">
+            <h2 id="lot-title" class="lot-title">Waiting for Next Lot...</h2>
+            <div id="lot-sku-row" class="lot-sku-row">
+              <span class="sku-tag" id="lot-sku">STANDBY</span>
+              <span class="cert-tag hidden" id="lot-cert">CERT: #---</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bid-panel">
+          <div class="bid-col">
+            <span class="bid-label">STARTING</span>
+            <span id="start-bid" class="bid-amount">$1</span>
+          </div>
+          <div class="bid-arrow">➜</div>
+          <div class="bid-col highlight">
+            <span class="bid-label">CURRENT BID</span>
+            <span id="current-bid" class="bid-amount live-bid">$1</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Viral Product-Led Growth (PLG) Footer -->
+    <footer class="hud-footer">
+      <a href="https://whatnotelse.com?ref=live_overlay" target="_blank" class="plg-pill">
+        <span class="plg-lightning">⚡</span>
+        <span class="plg-main">Powered by <strong>WhatnotElse</strong></span>
+        <span class="plg-divider">•</span>
+        <span class="plg-sub">Live Seller ERP & Automation</span>
+        <span class="plg-cta">Start Free at <strong>whatnotelse.com</strong></span>
+      </a>
+    </footer>
+  </div>
+
+  <script src="/assets/whatnot_else/js/overlay.js"></script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+{
+ "autoname": "format:TENANT-{subdomain}",
+ "creation": "2026-09-09 13:00:00.000000",
+ "docstatus": 0,
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "field_order": [
+  "tenant_name",
+  "subdomain",
+  "owner_email",
+  "status",
+  "column_break_1",
+  "site_name",
+  "cluster_host",
+  "provisioned_at",
+  "suspended_at",
+  "section_break_plan",
+  "subscription",
+  "plan",
+  "stripe_customer_id",
+  "section_break_config",
+  "max_shows_per_month",
+  "max_trays",
+  "enable_multi_channel_sync",
+  "enable_ai_copilot",
+  "section_break_notes",
+  "admin_notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "tenant_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Tenant Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "subdomain",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Subdomain",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "owner_email",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Owner Email",
+   "options": "Email",
+   "reqd": 1
+  },
+  {
+   "default": "Pending",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Pending\nProvisioning\nActive\nSuspended\nCancelled"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "site_name",
+   "fieldtype": "Data",
+   "label": "Frappe Site Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cluster_host",
+   "fieldtype": "Data",
+   "label": "Cluster Host",
+   "read_only": 1
+  },
+  {
+   "fieldname": "provisioned_at",
+   "fieldtype": "Datetime",
+   "label": "Provisioned At",
+   "read_only": 1
+  },
+  {
+   "fieldname": "suspended_at",
+   "fieldtype": "Datetime",
+   "label": "Suspended At",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_plan",
+   "fieldtype": "Section Break",
+   "label": "Subscription & Plan"
+  },
+  {
+   "fieldname": "subscription",
+   "fieldtype": "Link",
+   "label": "Active Subscription",
+   "options": "Whatnot Tenant Subscription"
+  },
+  {
+   "fieldname": "plan",
+   "fieldtype": "Link",
+   "label": "Current Plan",
+   "options": "Whatnot Subscription Plan"
+  },
+  {
+   "fieldname": "stripe_customer_id",
+   "fieldtype": "Data",
+   "label": "Stripe Customer ID"
+  },
+  {
+   "fieldname": "section_break_config",
+   "fieldtype": "Section Break",
+   "label": "Feature Limits (from Plan)"
+  },
+  {
+   "default": "10",
+   "fieldname": "max_shows_per_month",
+   "fieldtype": "Int",
+   "label": "Max Shows / Month",
+   "read_only": 1
+  },
+  {
+   "default": "50",
+   "fieldname": "max_trays",
+   "fieldtype": "Int",
+   "label": "Max Fulfillment Trays",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_multi_channel_sync",
+   "fieldtype": "Check",
+   "label": "Multi-Channel Sync Enabled",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_ai_copilot",
+   "fieldtype": "Check",
+   "label": "AI Audio Co-Pilot Enabled",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_notes",
+   "fieldtype": "Section Break",
+   "label": "Admin Notes"
+  },
+  {
+   "fieldname": "admin_notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2026-09-09 13:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Whatnot Else",
+ "name": "Whatnot Tenant",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

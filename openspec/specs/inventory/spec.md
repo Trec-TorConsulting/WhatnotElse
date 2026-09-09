@@ -30,6 +30,9 @@ through listing, live show appearance, sale, and archival.
 - Clothing: brand, size, era, style
 - General items: flexible custom field set
 
+### Requirement: Graded collectible and authentication tracking
+The system SHALL store and manage third-party authentication and grading details on Whatnot Item records, including grading company, certified numerical grade, certification number, and population report notes for trading cards, comics, and coins.
+
 ### Requirement: Inventory valuation
 - Dashboard widget: total items by status (Listed, Live, Sold, Archived)
 - Total COGS of active inventory
@@ -57,3 +60,10 @@ Draft → Listed → Live (in show) → Sold | Relisted | Archived
 - WHEN a Whatnot Show Item row is marked sold=true
 - THEN linked Whatnot Item status changes to "Sold"
 - AND item is removed from available inventory count
+
+### Scenario: Creating a graded collectible item
+- WHEN a seller creates or imports a trading card with `is_graded` checked
+- THEN the system SHALL allow selecting `grading_company` (PSA, BGS, CGC, SGC, PCGS, NGC)
+- AND require or record `grade` (e.g. "PSA 10 Gem Mint", "CGC 9.8 Near Mint/Mint")
+- AND record the unique certification number (`cert_number`)
+- AND make the certification number searchable via barcode/QR scanner
